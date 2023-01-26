@@ -32,13 +32,19 @@ function NewNote() {
                 />
             </div>
 
-            <div>
-                <ul>
-                    {notes.map((note, i) => {
-                        return <li key={`${i}-${note}`}>{note}</li>;
-                    })}
-                </ul>
-            </div>
+            <NoteList notes={notes} />
+        </div>
+    );
+}
+
+function NoteList({ notes }) {
+    return (
+        <div>
+            <ul>
+                {notes.map((note, i) => {
+                    return <li key={`${i}-${note}`}>{note}</li>;
+                })}
+            </ul>
         </div>
     );
 }

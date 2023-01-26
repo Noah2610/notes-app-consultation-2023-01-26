@@ -1,9 +1,7 @@
 import { useState } from "react";
-import NoteList from "./NoteList";
 
-export default function NewNote() {
+export default function NewNote({ addNote }) {
     const [note, setNote] = useState("");
-    const [notes, setNotes] = useState([]);
 
     return (
         <div>
@@ -15,17 +13,12 @@ export default function NewNote() {
                     onChange={(event) => setNote(event.target.value)}
                     onKeyUp={(event) => {
                         if (event.key === "Enter") {
-                            setNotes((prevNotes) => {
-                                const newNotes = prevNotes.concat([note]);
-                                return newNotes;
-                            });
+                            addNote(note);
                             setNote("");
                         }
                     }}
                 />
             </div>
-
-            <NoteList notes={notes} />
         </div>
     );
 }

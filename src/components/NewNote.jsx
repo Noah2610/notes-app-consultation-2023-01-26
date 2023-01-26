@@ -1,14 +1,7 @@
 import { useState } from "react";
+import NoteList from "./NoteList";
 
-function App() {
-    return (
-        <>
-            <NewNote />
-        </>
-    );
-}
-
-function NewNote() {
+export default function NewNote() {
     const [note, setNote] = useState("");
     const [notes, setNotes] = useState([]);
 
@@ -36,17 +29,3 @@ function NewNote() {
         </div>
     );
 }
-
-function NoteList({ notes }) {
-    return (
-        <div>
-            <ul>
-                {notes.map((note, i) => {
-                    return <li key={`${i}-${note}`}>{note}</li>;
-                })}
-            </ul>
-        </div>
-    );
-}
-
-export default App;

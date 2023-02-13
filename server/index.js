@@ -5,16 +5,30 @@ const PORT = 3001;
 
 const server = express();
 
-const notes = ["Hello", "Note"];
-
+server.use(express.json());
 server.use(cors());
+
+const NOTES = ["Hello", "Note"];
 
 server.get("/", (req, res) => {
     res.send("Hello Notes App");
 });
 
 server.get("/notes", (req, res) => {
-    res.send(notes);
+    res.send(NOTES);
+});
+
+server.post("/notes", (req, res) => {
+    // example body json:
+    // {
+    //    note: "New Note"
+    // }
+    const note = req.body.note;
+    console.log(note);
+
+    NOTES.push(note);
+
+    res.send("Note added");
 });
 
 server.listen(PORT, () => {

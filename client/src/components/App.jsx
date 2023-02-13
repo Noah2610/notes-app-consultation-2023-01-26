@@ -21,6 +21,17 @@ function App() {
             const newNotes = prevNotes.concat([note]);
             return newNotes;
         });
+
+        // send new note data to server
+        fetch("http://localhost:3001/notes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                note: note,
+            }),
+        });
     }
 
     return (

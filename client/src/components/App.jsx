@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewNote from "./NewNote";
 import NoteList from "./NoteList";
 
+// TODO:
+// Add notes refetch button
+
 function App() {
     const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3001/notes")
+            .then((res) => res.json())
+            .then((json) => {
+                setNotes(json);
+            });
+    }, []);
 
     function addNote(note) {
         setNotes((prevNotes) => {

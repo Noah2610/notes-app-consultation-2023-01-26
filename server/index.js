@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs";
 
 const PORT = 3001;
 
@@ -8,14 +9,30 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 
-const NOTES = ["Hello", "Note"];
+function getNotes() {
+    const content = fs.readFileSync("./data.json", "utf8");
+    const json = JSON.parse(content);
+    return json.notes;
+}
+
+function addNote(note) {
+    const notes = getNotes();
+    notes.push(note);
+
+    const json = {
+        notes: notes,
+    };
+
+    fs.writeFileSync("./data.json", JSON.stringify(json));
+}
 
 server.get("/", (req, res) => {
     res.send("Hello Notes App");
 });
 
 server.get("/notes", (req, res) => {
-    res.send(NOTES);
+    const notes = getNotes();
+    res.send(notes);
 });
 
 server.post("/notes", (req, res) => {
@@ -24,7 +41,9 @@ server.post("/notes", (req, res) => {
     //    note: "New Note"
     // }
     const note = req.body.note;
-    NOTES.push(note);
+
+    addNote(note);
+
     res.send("Note added");
 });
 

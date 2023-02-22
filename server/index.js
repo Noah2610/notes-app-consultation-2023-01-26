@@ -10,9 +10,13 @@ server.use(express.json());
 server.use(cors());
 
 function getNotes() {
-    const content = fs.readFileSync("./data.json", "utf8");
-    const json = JSON.parse(content);
-    return json.notes;
+    try {
+        const content = fs.readFileSync("./data.json", "utf8");
+        const json = JSON.parse(content);
+        return json.notes;
+    } catch (err) {
+        return [];
+    }
 }
 
 function addNote(note) {

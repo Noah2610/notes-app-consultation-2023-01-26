@@ -22,12 +22,21 @@ function getNotes() {
 function addNote(note) {
     const notes = getNotes();
     notes.push(note);
+    saveNotes(notes);
+}
 
+function saveNotes(notes) {
     const json = {
         notes: notes,
     };
 
     fs.writeFileSync("./data.json", JSON.stringify(json));
+}
+
+function deleteNote(index) {
+    const notes = getNotes();
+    notes.splice(index, 1);
+    saveNotes(notes);
 }
 
 server.get("/", (req, res) => {
@@ -49,6 +58,12 @@ server.post("/notes", (req, res) => {
     addNote(note);
 
     res.send("Note added");
+});
+
+server.delete("/notes/:index", (req, res) => {
+    const index = parseInt(req.params.index);
+    deleteNote(index);
+    res.send("Deleting...");
 });
 
 server.listen(PORT, () => {

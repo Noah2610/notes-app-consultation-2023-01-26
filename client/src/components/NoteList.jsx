@@ -1,10 +1,4 @@
-export default function NoteList({ notes }) {
-    function deleteNote(index) {
-        fetch(`http://localhost:3001/notes/${index}`, {
-            method: "DELETE",
-        });
-    }
-
+export default function NoteList({ notes, deleteNote }) {
     return (
         <ul>
             {notes.map((note, i) => {

@@ -5,20 +5,18 @@ export default function NewNote({ addNote }) {
 
     return (
         <div>
-            <div>
-                <input
-                    type="text"
-                    placeholder="New note"
-                    value={note}
-                    onChange={(event) => setNote(event.target.value)}
-                    onKeyUp={(event) => {
-                        if (event.key === "Enter") {
-                            addNote(note);
-                            setNote("");
-                        }
-                    }}
-                />
-            </div>
+            <input
+                type="text"
+                placeholder="New note"
+                value={note}
+                onChange={(event) => setNote(event.target.value)}
+                onKeyUp={(event) => {
+                    if (event.key === "Enter") {
+                        addNote(note);
+                        setNote("");
+                    }
+                }}
+            />
         </div>
     );
 }

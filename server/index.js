@@ -24,10 +24,7 @@ server.post("/notes", (req, res) => {
     //    note: "New Note"
     // }
     const note = req.body.note;
-    console.log(note);
-
     NOTES.push(note);
-
     res.send("Note added");
 });
 
